@@ -1,7 +1,9 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../Firebase/Firebase.config";
+import { useState } from "react";
 
 const HeroRegister = () => {
+  const [heroRegisterError, setHeroRegisterError] = useState('');
 
     const handleHeroRegister = e =>{
         e.preventDefault();
@@ -14,6 +16,7 @@ const HeroRegister = () => {
         })
         .catch(error=>{
             console.error(error);
+            setHeroRegisterError(error.message);
         })
     }
 
@@ -66,6 +69,9 @@ const HeroRegister = () => {
             </form>
           </div>
         </div>
+        {
+          heroRegisterError && <p className="text-red-600">{heroRegisterError}</p>
+        }
       </div>
     </div>
   );
